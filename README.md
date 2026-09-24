@@ -51,3 +51,7 @@ python3 scripts/build_catalog.py
 | `index.html` | 首页：品牌 + 搜索 + 分类 + Top picks |
 | `shop.html` | 列表：搜索 / 分类 / 排序 / wishlist |
 | `item.html` | 详情：种子图 gallery + QC 页签（空 batches） |
+
+## Google 站点地图
+
+`python3 scripts/generate_sitemap.py` 根据 `js/catalog.js` 生成 `sitemap.xml` 和 `robots.txt`。线上站点地图地址：`https://kakobuygoodsqc.com/sitemap.xml`。
