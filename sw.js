@@ -1,5 +1,5 @@
-const CACHE_NAME = "kakoqc-shell-v1";
-const SHELL = ["./", "./index.html", "./shop.html", "./item.html", "./css/style.css", "./js/site.js", "./js/catalog.js", "./manifest.json", "./img/logo.png", "./img/favicon.png", "./img/icon-192.png", "./img/icon-512.png"];
+const CACHE_NAME = "kakoqc-shell-v2";
+const SHELL = ["./", "./index.html", "./shop.html", "./item.html", "./css/style.css", "./js/site.js", "./js/catalog.js", "./manifest.json?v=2", "./img/logo.png", "./img/favicon.png", "./img/icon-192.png", "./img/icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -12,6 +12,13 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
+  if (new URL(request.url).pathname.endsWith("/manifest.json")) {
+    event.respondWith(fetch(request).then((response) => {
+      if (response.ok) caches.open(CACHE_NAME).then((cache) => cache.put(request, response.clone()));
+      return response;
+    }).catch(() => caches.match(request)));
+    return;
+  }
   if (request.mode === "navigate") {
     event.respondWith(fetch(request).then((response) => {
       if (response.ok) caches.open(CACHE_NAME).then((cache) => cache.put(request, response.clone()));
