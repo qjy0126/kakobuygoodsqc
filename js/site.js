@@ -245,7 +245,7 @@
     if (!installGuide) {
       installGuide = document.createElement("dialog");
       installGuide.className = "install-guide";
-      installGuide.innerHTML = `<div class="install-guide-head"><strong>Add KakoQC to your device</strong><button type="button" aria-label="Close">×</button></div><p class="install-guide-copy"></p>`;
+      installGuide.innerHTML = `<div class="install-guide-head"><strong>Add KakobuyQC to your device</strong><button type="button" aria-label="Close">×</button></div><p class="install-guide-copy"></p>`;
       installGuide.querySelector("button").addEventListener("click", () => installGuide.close());
       installGuide.addEventListener("click", (event) => { if (event.target === installGuide) installGuide.close(); });
       document.body.appendChild(installGuide);
@@ -267,7 +267,7 @@
     if (!host) return;
     host.innerHTML = `<div class="wrap footer-grid">
       <div>
-        <h3>KakoQC</h3>
+        <h3>KakobuyQC</h3>
         <p>QC photos, videos, and spreadsheet finder for CNFans, Oopbuy, ACBuy, Kakobuy, and more. Explore QC content from Taobao, Weidian, and 1688 — then buy on Kakobuy.</p>
       </div>
       <div>
@@ -278,6 +278,11 @@
       <div>
         <h3>Note</h3>
         <p>Warehouse <code>qc_batches</code> stays empty until Kakobuy authorizes a QC feed. Seed gallery photos are reference angles only.</p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p><a href="privacy.html">Privacy policy</a></p>
+        <p><a href="disclaimer.html">Disclaimer</a></p>
       </div>
     </div>`;
   }
@@ -309,7 +314,13 @@
     else if (sort === "picks") {
       const rank = new Map((catalog.topPickIds || []).map((id, i) => [String(id), i]));
       list.sort((a, b) => (rank.get(String(a.id)) ?? 9999) - (rank.get(String(b.id)) ?? 9999));
-    } else list.sort((a, b) => (b.opens || 0) - (a.opens || 0) || (b.score || 0) - (a.score || 0));
+    } else list.sort((a, b) => {
+      const aHasBadge = warehouseCount(a) > 0 || seedCount(a) > 1;
+      const bHasBadge = warehouseCount(b) > 0 || seedCount(b) > 1;
+      return Number(bHasBadge) - Number(aHasBadge) ||
+        (b.opens || 0) - (a.opens || 0) ||
+        (b.score || 0) - (a.score || 0);
+    });
     return list;
   }
 
@@ -422,10 +433,10 @@
     const slice = list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     document.title = state.cat
-      ? `${catalog.categories.find((c) => c.slug === state.cat)?.label || "Browse"} — KakoQC`
+      ? `${catalog.categories.find((c) => c.slug === state.cat)?.label || "Browse"} — KakobuyQC`
       : state.wish
-        ? "Wishlist — KakoQC"
-        : "Browse — KakoQC";
+        ? "Wishlist — KakobuyQC"
+        : "Browse — KakobuyQC";
 
     const title = $("#shop-title");
     if (title) {
@@ -530,7 +541,7 @@
     const catLabel =
       (catalog.categories || []).find((c) => c.slug === item.category)?.label || item.category || "finds";
 
-    document.title = `${item.title} — KakoQC`;
+    document.title = `${item.title} — KakobuyQC`;
 
     root.innerHTML = `
       <a class="item-back" href="shop.html">

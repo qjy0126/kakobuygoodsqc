@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "kakobuyqc",
-  "short_name": "kakobuyqc",
+  "name": "KakobuyQC",
+  "short_name": "KakobuyQC",
   "description": "QC photos, videos, and spreadsheet finder for Kakobuy and Oopbuy.",
   "start_url": "./index.html?source=pwa",
   "scope": "./",

@@ -1,6 +1,6 @@
-# KakoQC
+# KakobuyQC
 
-独立新站（目录 `goodsqc/`），品牌 **KakoQC**。按 QC 索引站的信息架构做了搜索、分类、Top picks、详情多图和空的 `qc_batches`，数据用你自己的 Excel + 本地种子图，不是搬 GoodsQC。
+独立新站（目录 `goodsqc/`），品牌 **KakobuyQC**。按 QC 索引站的信息架构做了搜索、分类、Top picks、详情多图和空的 `qc_batches`，数据用你自己的 Excel + 本地种子图，不是搬 GoodsQC。
 
 ## 本地预览
 
@@ -42,7 +42,7 @@ python3 scripts/build_catalog.py
 
 ## 图片
 
-商品图位于 `img/products`，页面图标和品牌图位于 `img/`。上传版本包含实际商品图片文件，GitHub Pages 无需访问其他项目目录。
+`img/products`、`logo`、`favicon` 软链到 `../../kakobuyqcsheets/img`。上线前可改成拷贝或独立 CDN。
 
 ## 页面
 

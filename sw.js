@@ -1,5 +1,5 @@
-const CACHE_NAME = "kakoqc-shell-v2";
-const SHELL = ["./", "./index.html", "./shop.html", "./item.html", "./css/style.css", "./js/site.js", "./js/catalog.js", "./manifest.json?v=2", "./img/logo.png", "./img/favicon.png", "./img/icon-192.png", "./img/icon-512.png"];
+const CACHE_NAME = "kakoqc-shell-v3";
+const SHELL = ["./", "./index.html", "./shop.html", "./item.html", "./privacy.html", "./disclaimer.html", "./css/style.css", "./js/site.js", "./js/catalog.js", "./manifest.json?v=2", "./img/logo.png", "./img/favicon.png", "./img/icon-192.png", "./img/icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
